@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>deiss-it — IT für Startups & moderne Unternehmen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    --navy: #0A1428; --navy2: #0F1E3D; --blue: #2D6FEE; --cyan: #4FD1E8;
+    --paper: #F3F6FC; --ink: #0E1A33; --line: #D7E1F2;
+    --bg: var(--navy); --fg: #EAF1FB; --card: #11213B; --muted: #8CA3C7; --card-line: #1F3258;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  :root[data-theme="light"] {
+    --bg: var(--paper); --fg: var(--ink); --card: #ffffff; --muted: #5A6B8C; --card-line: var(--line);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; background: var(--bg); color: var(--fg);
+    font-family:'Inter',-apple-system,sans-serif; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3 { font-family:'Space Grotesk',sans-serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  .wrap { max-width: 1000px; margin:0 auto; padding: 0 1.5rem; }
+  a { color: var(--cyan); }
+
+  header { position: sticky; top: env(safe-area-inset-top,0px); background: rgba(10,20,40,0.85); backdrop-filter: blur(8px); z-index:10; border-bottom:1px solid var(--card-line); }
+  :root[data-theme="light"] header { background: rgba(243,246,252,0.9); }
+  .nav { display:flex; justify-content:space-between; align-items:center; padding:1.1rem 1.5rem; max-width:1000px; margin:0 auto; }
+  .logo { font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.15rem; }
+  .logo span { color: var(--cyan); }
+  nav a { color: var(--fg); text-decoration:none; font-size:0.9rem; margin-left:1.6rem; opacity:0.85; }
+  nav a:hover { color: var(--cyan); opacity:1; }
+
+  .hero { position: relative; padding: 5rem 0 4rem; overflow: hidden; }
+  .hero::before {
+    content:''; position:absolute; inset:-20% -10% auto -10%; height:140%;
+    background: radial-gradient(circle at 20% 20%, rgba(45,111,238,0.35), transparent 55%),
+                radial-gradient(circle at 80% 10%, rgba(79,209,232,0.25), transparent 50%);
+    pointer-events:none;
+  }
+  .hero-grid { position:relative; display:grid; grid-template-columns:1.05fr 0.95fr; gap:3rem; align-items:center; }
+  @media (max-width:760px){ .hero-grid{ grid-template-columns:1fr; gap:2rem;} .hero{padding:3rem 0 2.5rem;} }
+  .eyebrow { display:inline-block; color:var(--cyan); font-size:0.8rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; margin-bottom:1rem; padding:0.3rem 0.7rem; border:1px solid var(--card-line); border-radius:20px; }
+  .hero h1 { font-size:clamp(2.2rem,4.6vw,3.3rem); line-height:1.1; max-width:15ch; }
+  .hero h1 .grad { background:linear-gradient(90deg,var(--blue),var(--cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .hero p.sub { max-width:44ch; color:var(--muted); margin-top:1.2rem; font-size:1.05rem; }
+  .cta-row { display:flex; gap:1rem; margin-top:1.9rem; flex-wrap:wrap; }
+  .btn { display:inline-block; padding:0.8rem 1.5rem; border-radius:8px; text-decoration:none; font-size:0.95rem; font-weight:500; }
+  .btn-primary { background:linear-gradient(90deg,var(--blue),var(--cyan)); color:#061021; }
+  .btn-ghost { border:1px solid var(--card-line); color:var(--fg); }
+  .btn-ghost:hover { border-color:var(--cyan); color:var(--cyan); }
+
+  .hero-art { width:100%; max-width:380px; margin:0 auto; position:relative; }
+
+  section { padding:3.4rem 0; border-top:1px solid var(--card-line); position:relative; }
+  .section-head { display:flex; justify-content:space-between; align-items:baseline; gap:1rem; margin-bottom:2.2rem; flex-wrap:wrap; }
+  .section-head h2 { font-size:1.7rem; max-width:20ch; }
+  .section-note { color:var(--muted); font-size:0.88rem; max-width:30ch; }
+
+  .services { display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; }
+  @media (max-width:760px){ .services{ grid-template-columns:1fr; } }
+  .service { background:var(--card); border:1px solid var(--card-line); border-radius:12px; padding:1.8rem 1.6rem; transition:border-color .2s; }
+  .service:hover { border-color: var(--blue); }
+  .service .icon { width:38px; height:38px; margin-bottom:1rem; color:var(--cyan); }
+  .service h3 { font-size:1.1rem; margin-bottom:0.6rem; }
+  .service p { color:var(--muted); font-size:0.93rem; margin:0; }
+
+  .story { display:grid; grid-template-columns:0.85fr 1.15fr; gap:2.8rem; align-items:start; }
+  @media (max-width:760px){ .story{ grid-template-columns:1fr; gap:1.5rem; } }
+  .story h2 { font-size:1.7rem; max-width:16ch; }
+  .story .lead { color:var(--cyan); font-size:0.95rem; margin-top:0.8rem; font-weight:500; }
+  .story-body p { margin:0 0 1rem; color:var(--muted); }
+  .story-body p:last-child { margin-bottom:0; }
+
+  .audience { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+  @media (max-width:760px){ .audience{ grid-template-columns:1fr; } }
+  .aud-card { border:1px solid var(--card-line); border-radius:12px; padding:1.7rem; background:var(--card); }
+  .aud-card .tag { color:var(--cyan); font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.03em; margin-bottom:0.6rem; }
+  .aud-card h3 { font-size:1.08rem; margin-bottom:0.5rem; }
+  .aud-card p { color:var(--muted); font-size:0.92rem; margin:0; }
+
+  footer { border-top:1px solid var(--card-line); padding:3.2rem 0 calc(2.4rem + env(safe-area-inset-bottom,0px)); }
+  .foot-grid { display:flex; justify-content:space-between; align-items:flex-end; gap:2rem; flex-wrap:wrap; }
+  .foot-grid h2 { font-size:1.6rem; max-width:14ch; }
+  .foot-contact { font-size:0.95rem; }
+  .foot-contact a { text-decoration:none; }
+  .foot-meta { color:var(--muted); font-size:0.82rem; margin-top:2rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">deiss<span>·</span>it</div>
+    <nav>
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ueber">Über mich</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap hero">
+  <div class="hero-grid">
+    <div>
+      <div class="eyebrow">IT für Startups & moderne Unternehmen</div>
+      <h1>IT-Infrastruktur, <span class="grad">die mitwächst.</span></h1>
+      <p class="sub">Website, Microsoft 365, Google Workspace, Datensicherheit und Hardware — eingerichtet und betreut von jemandem, der komplexe IT-Umgebungen seit Jahren eigenverantwortlich führt.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#kontakt">Beratung anfragen</a>
+        <a class="btn btn-ghost" href="#leistungen">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div>
+      <svg class="hero-art" viewBox="0 0 380 320" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2D6FEE"/>
+            <stop offset="1" stop-color="#4FD1E8"/>
+          </linearGradient>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#2D6FEE" stop-opacity="0.35"/>
+            <stop offset="1" stop-color="#2D6FEE" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="190" cy="160" r="150" fill="url(#glow)"/>
+        <g stroke="url(#lg1)" stroke-width="1.4" fill="none" opacity="0.85">
+          <line x1="70" y1="90" x2="190" y2="60"/>
+          <line x1="190" y1="60" x2="300" y2="100"/>
+          <line x1="70" y1="90" x2="100" y2="190"/>
+          <line x1="190" y1="60" x2="190" y2="170"/>
+          <line x1="300" y1="100" x2="280" y2="210"/>
+          <line x1="190" y1="170" x2="100" y2="190"/>
+          <line x1="190" y1="170" x2="280" y2="210"/>
+          <line x1="100" y1="190" x2="150" y2="260"/>
+          <line x1="280" y1="210" x2="230" y2="260"/>
+          <line x1="150" y1="260" x2="230" y2="260"/>
+        </g>
+        <g fill="url(#lg1)">
+          <circle cx="70" cy="90" r="7"/>
+          <circle cx="190" cy="60" r="8"/>
+          <circle cx="300" cy="100" r="7"/>
+          <circle cx="190" cy="170" r="10"/>
+          <circle cx="100" cy="190" r="7"/>
+          <circle cx="280" cy="210" r="7"/>
+          <circle cx="150" cy="260" r="6"/>
+          <circle cx="230" cy="260" r="6"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<section id="leistungen">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Drei Bausteine, ein Ansprechpartner</h2>
+      <div class="section-note">Einzeln buchbar oder als laufende Betreuung im Paket.</div>
+    </div>
+    <div class="services">
+      <div class="service">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        <h3>Internetauftritt</h3>
+        <p>Moderne Website, die zeigt, wer ihr seid — eingerichtet, gepflegt und verständlich erklärt.</p>
+      </div>
+      <div class="service">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M18 10a4 4 0 0 0-4-4 5 5 0 0 0-9.6 1.5A4 4 0 0 0 5 15h13a3 3 0 0 0 0-6z"/></svg>
+        <h3>Microsoft 365 & Google Workspace</h3>
+        <p>E-Mail, Dateiablage und Zusammenarbeit sauber eingerichtet — auf der Plattform, die zu euch passt.</p>
+      </div>
+      <div class="service">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg>
+        <h3>Betreuung & Sicherheit</h3>
+        <p>Laufender Support für Hardware, Software und Datensicherung, damit im Alltag nichts stillsteht.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="ueber">
+  <div class="wrap story">
+    <div>
+      <h2>Fundiertes IT-Know-how, direkt einsatzbereit</h2>
+      <p class="lead">Seit 4 Jahren alleinverantwortlich für eine komplette Unternehmens-IT.</p>
+    </div>
+    <div class="story-body">
+      <p>Ich verantworte seit vier Jahren als einziger IT-Zuständiger die komplette Infrastruktur eines mittelständischen Unternehmens — von der Cloud-Anbindung bis zum Support am Arbeitsplatz. Diese Erfahrung bringe ich in jedes Kundenprojekt ein.</p>
+      <p>Mit deiss-it biete ich kleinen, wachsenden Teams genau das: eine verlässliche IT-Grundlage, die mitwächst, ohne dass ihr eine eigene IT-Abteilung aufbauen müsst.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Für wen ich arbeite</h2>
+      <div class="section-note">Kleine Teams, die IT nicht selbst stemmen wollen.</div>
+    </div>
+    <div class="audience">
+      <div class="aud-card">
+        <div class="tag">Startups</div>
+        <h3>Kleine, wachsende Teams</h3>
+        <p>Solide IT-Grundlage von Anfang an, die mitwächst, statt später mühsam nachgezogen zu werden.</p>
+      </div>
+      <div class="aud-card">
+        <div class="tag">Kleine Unternehmen</div>
+        <h3>1–10 Personen</h3>
+        <p>Von Kanzleien über Planungsbüros bis zu Agenturen — ohne eigene IT-Abteilung, aber mit echtem Bedarf.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="kontakt">
+  <div class="wrap">
+    <div class="foot-grid">
+      <h2>Lust auf ein unverbindliches Gespräch?</h2>
+      <div class="foot-contact">
+        <a href="mailto:info@deiss-it.de">info@deiss-it.de</a><br>
+        deiss-it.de
+      </div>
+    </div>
+    <div class="foot-meta">© 2026 deiss-it — IT-Dienstleistungen für Startups & kleine Unternehmen</div>
+  </div>
+</footer>
+
+</body>
+</html>
